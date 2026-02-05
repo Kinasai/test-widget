@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
 use Propaganistas\LaravelPhone\Casts\E164PhoneNumberCast;
 
@@ -23,5 +24,10 @@ class Customer extends Model
         return [
             'phone_number' => E164PhoneNumberCast::class
         ];
+    }
+
+    protected function customer(): BelongsTo
+    {
+        return $this->belongsTo(Customer::class);
     }
 }
