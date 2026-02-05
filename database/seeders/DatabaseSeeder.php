@@ -2,6 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Customer;
+use App\Models\Ticket;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,11 +19,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $manager = User::query()->create([
+            'name' => 'manager',
+            'email' => 'manager@gmail.com',
+            'password' => bcrypt('123456')
         ]);
+
+        Role::query()->create(['name' => 'Admin']);
+
+        $role = Role::query()->create(['name' => 'Manager']);
+
+        $permissions = Permission::query()->pluck('id','id')->all();
+
+        $role->syncPermissions($permissions);
+
+        $manager->assignRole([$role->id]);
+
+        Ticket::factory(200)->create();
     }
 }
