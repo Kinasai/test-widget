@@ -30,13 +30,16 @@ class TicketFactory extends Factory
         }else{
             $customer_id = Customer::factory()->create()->id;
         }
+        $date = fake()->dateTimeThisYear();
 
         return [
             'customer_id' => $customer_id,
             'title' => fake()->text(fake()->numberBetween(10, 40)),
             'text' => fake()->text(),
             'status' => $status,
-            'response_date' => $status == TicketStatus::Processed ? fake()->dateTime() : null,
+            'response_date' => $status == TicketStatus::Processed ? fake()->dateTimeBetween($date) : null,
+            'created_at' => $date,
+            'updated_at' => $date,
         ];
     }
 }

@@ -21,13 +21,15 @@ class TicketRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'phone_number' => 'required|phone:international',
-            'title' => 'required|string|max:255',
-            'text' => 'required|string|max:1000',
-        ];
+        return match ($this->method()) {
+            'POST' => [
+                'name' => 'required|string|max:255',
+                'email' => 'required|email',
+                'phone_number' => 'required|phone:international',
+                'title' => 'required|string|max:255',
+                'text' => 'required|string|max:1000',
+            ]
+        };
     }
 
     public function messages(): array
