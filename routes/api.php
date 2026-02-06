@@ -8,5 +8,5 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('/tickets', [TicketController::class, 'store'])->middleware('csrf');
+Route::post('/tickets', [TicketController::class, 'store']);
 Route::get('/tickets/statistics', [TicketController::class, 'statistics']);
