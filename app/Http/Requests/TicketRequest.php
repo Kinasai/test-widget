@@ -29,6 +29,10 @@ class TicketRequest extends FormRequest
                 'title' => 'required|string|max:255',
                 'text' => 'required|string|max:1000',
                 'file' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            ],
+            'GET' => [
+                'search' => 'sometimes|string',
+                'type' => 'sometimes|string',
             ]
         };
     }

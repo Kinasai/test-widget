@@ -14,9 +14,16 @@ class TicketController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(TicketRequest $request)
     {
-        return TicketResource::collection(Ticket::all());
+        $validated = $request->validated();
+
+        $tickets = Ticket::query()->filter($validated)->paginate(20);
+
+        return view('tickets.index', [
+            'tickets' => $tickets,
+            'ticketsCollection' => TicketResource::collection($tickets)->toArray(request())
+        ]);
     }
 
     /**
@@ -54,7 +61,9 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        //
+        return view('tickets.show', [
+            'ticket' => TicketResource::make($ticket->load(['media', 'customer']))->toArray(request())
+        ]);
     }
 
     /**

@@ -26,8 +26,5 @@ class Customer extends Model
         ];
     }
 
-    protected function customer(): BelongsTo
-    {
-        return $this->belongsTo(Customer::class);
-    }
+
 }
