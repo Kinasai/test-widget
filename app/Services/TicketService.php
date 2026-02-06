@@ -15,7 +15,7 @@ class TicketService
 
             $customer = (new CustomerService())->findOrCreateCustomer($request);
 
-            return Ticket::query()->create(
+            $ticket = Ticket::query()->create(
                 [
                     'customer_id' => $customer->id,
                     'title' => $request['title'],
@@ -23,6 +23,11 @@ class TicketService
                     'status' => TicketStatus::New,
                 ]
             );
+            if(isset($request['file'])) {
+                $ticket->addMediaFromRequest('file')->toMediaCollection('documents');
+            }
+
+            return $ticket;
         });
     }
 

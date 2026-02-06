@@ -28,6 +28,7 @@ class TicketRequest extends FormRequest
                 'phone_number' => 'required|phone:international',
                 'title' => 'required|string|max:255',
                 'text' => 'required|string|max:1000',
+                'file' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             ]
         };
     }
@@ -48,6 +49,9 @@ class TicketRequest extends FormRequest
             'text.required' => 'Поле "Сообщение" обязательно для заполнения.',
             'text.string' => 'Поле "Сообщение" должно быть строкой.',
             'text.max' => 'Поле "Сообщение" не должно превышать 1000 символов.',
+            'file.image' => 'Файл должен быть изображением',
+            'file.mimes' => 'Допустимые форматы изображений: jpeg, png, jpg, gif, webp',
+            'file.max' => 'Максимальный размер файла: 5MB',
         ];
     }
 }
