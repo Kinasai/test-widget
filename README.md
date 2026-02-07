@@ -6,6 +6,9 @@
 - `composer update`
 - `cp .env.example .env && php artisan key:generate && php artisan storage:link`
 - `php artisan migrate`
+- `npm i`
+- `npm run build`
+  
 ### Тестовое наполнение таблицы
 
 - `php artisan db:seed`
