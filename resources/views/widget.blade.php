@@ -11,11 +11,26 @@
 <div class="container panel panel-default ">
     <h2 class="">Форма обратной связи</h2>
     <form id="ticket" enctype="multipart/form-data">
-        <x-input :id="'name'" :placeholder="'Введите имя'" :type="'text'"></x-input>
-        <x-input :id="'email'" :placeholder="'Введите email'" :type="'text'"></x-input>
-        <x-input :id="'phone_number'" :placeholder="'Введите телефон +7...'" :type="'text'"></x-input>
-        <x-input :id="'title'" :placeholder="'Введите тему'" :type="'text'"></x-input>
-        <x-textarea :id="'text'" :placeholder="'Введите сообщение'" :type="'text'"></x-textarea>
+        <div class="form-group">
+            <x-input class="form-control" name="name" id="name" placeholder="Введите имя" type="text"></x-input>
+            <div id="message_name" class="text-danger"></div>
+        </div>
+        <div class="form-group">
+            <x-input class="form-control" name="id" id="email" placeholder="Введите email" type="text"></x-input>
+            <div id="message_email" class="text-danger"></div>
+        </div>
+        <div class="form-group">
+            <x-input class="form-control" name="phone_number" id="phone_number" placeholder="Введите телефон +7..." type="text"></x-input>
+            <div id="message_phone_number" class="text-danger"></div>
+        </div>
+        <div class="form-group">
+            <x-input class="form-control" name="title" id="title" placeholder="Введите тему" type="text"></x-input>
+            <div id="message_title" class="text-danger"></div>
+        </div>
+        <div class="form-group">
+            <x-textarea class="form-control" name="text" id="text" placeholder="Введите сообщение" type="text"></x-textarea>
+            <div id="message_text" class="text-danger"></div>
+        </div>
         <div class="form-group">
             <label for="file">Прикрепить файл</label>
             <input id="file" name="file" type="file" accept="image/*" />
