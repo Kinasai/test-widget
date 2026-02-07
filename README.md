@@ -22,10 +22,10 @@
 
 ### API endpoint
 
-- `GET /tickets/statistics` - статистика тикетов
+- `GET api/tickets/statistics` - статистика тикетов
 - - Принимает параметр `period` значения `day`, `week`, `month`
 
-- `POST /tickets`
+- `POST api/tickets`
 - - `name` => Обязательное поле строка максимум 255 символов
 - - `email` => Обязательное поле тип email
 - - `phone_number` => Обязательное поле тип E164
