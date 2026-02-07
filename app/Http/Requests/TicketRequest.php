@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\TicketStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class TicketRequest extends FormRequest
 {
@@ -33,6 +35,9 @@ class TicketRequest extends FormRequest
             'GET' => [
                 'search' => 'sometimes|string',
                 'type' => 'sometimes|string',
+            ],
+            'PATCH' => [
+                'status' => ['required', Rule::in(TicketStatus::cases())],
             ]
         };
     }

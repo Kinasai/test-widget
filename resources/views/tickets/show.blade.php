@@ -8,6 +8,22 @@
                 <li class="breadcrumb-item active" aria-current="page">Тикет {{$ticket['id']}}</li>
             </ol>
         </nav>
+        <div class="d-flex justify-content-end">
+
+        <div class="col-3">
+
+            <form method="POST" action="{{ route('tickets.update-status', $ticket['id']) }}" class="d-inline">
+                @csrf
+                @method('PATCH')
+                <label for="status">Изменить статус</label>
+                <div class="d-flex gap-2">
+                    <x-select name="status" class="form-control" :options="$statuses" :selected="$ticket['status']" />
+                    <button class="btn btn-secondary" id="submit">Изменить</button>
+                </div>
+            </form>
+        </div>
+        </div>
+
         <div>Имя: {{optional($ticket['customer'])['name'] ?? 'Без имени'}}</div>
         <div>Почта: {{optional($ticket['customer'])['email'] ?? 'Без почты'}}</div>
         <div>Номер телефона: {{optional($ticket['customer'])['phone_number'] ?? 'Без номера'}}</div>
@@ -16,7 +32,8 @@
         <div>Статус: {{$ticket['status_label']}}</div>
         <div>Дата ответа: {{$ticket['response_date'] ?: 'Без ответа'}}</div>
         <div>Дата создания: {{$ticket['created_at'] ?: 'Нет данных'}}</div>
-        @if($ticket['files']->count())
+
+    @if($ticket['files']->count())
             <div class="card">
                 <div class="card-header">
                     <h5>Вложения ({{ $ticket['files']->count() }})</h5>
@@ -41,6 +58,5 @@
                         @endforeach
             </div>
         @endif
-
-    </div>
+                </div>
 @endsection

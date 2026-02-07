@@ -67,8 +67,11 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
+        $statuses = TicketStatus::forSelect();
+
         return view('tickets.show', [
-            'ticket' => TicketResource::make($ticket->load(['media', 'customer']))->toArray(request())
+            'ticket' => TicketResource::make($ticket->load(['media', 'customer']))->toArray(request()),
+            'statuses' => $statuses
         ]);
     }
 
@@ -83,9 +86,16 @@ class TicketController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Ticket $ticket)
+    public function update(TicketRequest $request, Ticket $ticket)
     {
-        //
+        $validated = $request->validated();
+
+        $ticketService = new TicketService;
+        $ticketService->updateStatus($ticket, $validated);
+
+
+        return redirect()->route('tickets.show', ['ticket' => $ticket])
+            ->with('success', 'Успешно');
     }
 
     /**

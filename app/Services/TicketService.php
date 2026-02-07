@@ -34,4 +34,9 @@ class TicketService
     {
         return Ticket::query()->period($request)->get();
     }
+
+    public function updateStatus(Ticket $ticket, mixed $validated)
+    {
+        return $ticket->update($validated);
+    }
 }
