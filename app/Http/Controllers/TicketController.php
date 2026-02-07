@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TicketStatus;
 use App\Http\Requests\TicketRequest;
 use App\Http\Requests\TicketStatisticRequest;
 use App\Http\Resources\TicketResource;
@@ -20,9 +21,14 @@ class TicketController extends Controller
 
         $tickets = Ticket::query()->filter($validated)->paginate(20);
 
+        $statuses = TicketStatus::forSelect();
+
         return view('tickets.index', [
             'tickets' => $tickets,
-            'ticketsCollection' => TicketResource::collection($tickets)->toArray(request())
+            'ticketsCollection' => TicketResource::collection($tickets)->toArray(request()),
+            'type' => $request->get('type', null),
+            'search' => $request->get('search', null),
+            'statuses' => $statuses
         ]);
     }
 

@@ -16,4 +16,13 @@ enum TicketStatus: string
             self::Processed => 'Обработан',
         };
     }
+
+    public static function forSelect(): array
+    {
+        $result = [];
+        foreach (self::cases() as $status) {
+            $result[$status->value] = $status->label();
+        }
+        return $result;
+    }
 }
